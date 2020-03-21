@@ -1,0 +1,496 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Sigo.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:Sigo.WebApi.Controllers.AccountController">
+            <summary>
+            提供与账户交互的相关功能
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Controllers.AccountController._accountService">
+            <summary>
+            <see cref="T:Sigo.WebApi.Services.IAccountService"/>
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Controllers.AccountController._configuration">
+            <summary>
+            <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.AccountController.#ctor(Sigo.WebApi.Services.IAccountService,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造<see cref="T:Sigo.WebApi.Controllers.AccountController"/>对象
+            </summary>
+            <param name="accountService">账户服务</param>
+            <param name="configuration">配置信息</param>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.AccountController.Login(Sigo.WebApi.Models.LoginModel)">
+            <summary>
+            登录
+            </summary>
+            <param name="loginInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.AccountController.Logout(System.String)">
+            <summary>
+            登出
+            </summary>
+            <param name="userId">用户Id</param>
+        </member>
+        <member name="T:Sigo.WebApi.Controllers.OrderController">
+            <summary>
+            提供医嘱相关信息的控制器
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Controllers.OrderController._orderService">
+            <summary>
+            <see cref="T:Sigo.WebApi.Services.IOrderService"/>
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Controllers.OrderController._configuration">
+            <summary>
+            <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.OrderController.#ctor(Sigo.WebApi.Services.IOrderService,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造<see cref="T:Sigo.WebApi.Controllers.PatientController"/>
+            </summary>
+            <param name="orderService"><see cref="T:Sigo.WebApi.Services.IOrderService"/></param>
+            <param name="configuration">配置信息</param>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.OrderController.GetOrderList(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            获取医嘱执行列表
+            </summary>
+            <param name="pvid">就诊唯一标识</param>
+            <param name="beginTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns>OrderEntity集合</returns>
+            <example>
+            <code>
+            GET http://localhost:8080/api/Order/list?pvid={pvid}&amp;beginTime={beginTime}&amp;endTime={endTime}
+            </code>
+            </example>
+        </member>
+        <member name="T:Sigo.WebApi.Controllers.PatientController">
+            <summary>
+            提供患者相关信息的控制器
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Controllers.PatientController._patientService">
+            <summary>
+            <see cref="T:Sigo.WebApi.Services.IPatientService"/>
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.PatientController.#ctor(Sigo.WebApi.Services.IPatientService)">
+            <summary>
+            构造<see cref="T:Sigo.WebApi.Controllers.PatientController"/>
+            </summary>
+            <param name="patientService"><see cref="T:Sigo.WebApi.Services.IPatientService"/></param>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.PatientController.Get(System.String)">
+            <summary>
+            获取指定<paramref name="patientId"/>的患者基本信息
+            </summary>
+            <param name="patientId">患者ID</param>
+            <returns>PatientEntity</returns>
+            <example>
+            <code>
+            GET: http://localhost:8080/api/Patient/20200217
+            </code>
+            </example>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.PatientController.GetPatientList(System.String)">
+             <summary>
+             获取指定病区的患者列表
+             </summary>
+             <param name="wardArea">病区</param>
+             <returns>PatientEntity集合</returns>
+            <example>
+             <code>
+             GET: http://localhost:8080/api/Patient/list/{wardArea}
+             </code>
+             </example>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.PatientController.GetUnIndept">
+             <summary>
+             获取未入科的患者列表
+             </summary>
+             <returns>PatientEntity集合</returns>
+            <example>
+             <code>
+             GET: http://localhost:8080/api/Patient/unIndept
+             </code>
+             </example>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.PatientController.GetIndept">
+             <summary>
+             获取已入科的患者列表
+             </summary>
+             <returns>PatientEntity集合</returns>
+            <example>
+             <code>
+             GET: http://localhost:8080/api/Patient/indept
+             </code>
+             </example>
+        </member>
+        <member name="T:Sigo.WebApi.Controllers.ResourceController">
+            <summary>
+            资源控制器
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.ResourceController.#ctor(Sigo.WebApi.Services.IResourceService)">
+            <summary>
+            构造<see cref="T:Sigo.WebApi.Controllers.ResourceController"/>对象
+            </summary>
+            <param name="resourceService"><see cref="T:Sigo.WebApi.Services.IResourceService"/>对象</param>
+        </member>
+        <member name="M:Sigo.WebApi.Controllers.ResourceController.Plugins">
+            <summary>
+            加载前端React插件的配置信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Sigo.WebApi.Filters.AccountActionFilter">
+            <summary>
+            登录验证请求相关筛选器
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Filters.AccountActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            请求执行后处理
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext"/></param>
+        </member>
+        <member name="T:Sigo.WebApi.Filters.BaseActionFilter">
+            <summary>
+            筛选器基类
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Filters.BaseActionFilter._log">
+            <summary>
+            log对象
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Filters.BaseActionFilter.#ctor">
+            <summary>
+            构造<see cref="T:Sigo.WebApi.Filters.PatientActionFilter"/>对象
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Filters.BaseActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary>
+            请求执行前处理
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext"/></param>
+        </member>
+        <member name="M:Sigo.WebApi.Filters.BaseActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            请求执行后处理
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext"/></param>
+        </member>
+        <member name="T:Sigo.WebApi.Filters.PatientActionFilter">
+            <summary>
+            患者相关请求筛选器
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Filters.PatientActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)">
+            <summary>
+            请求执行后处理
+            </summary>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext"/></param>
+        </member>
+        <member name="T:Sigo.WebApi.SigoConst">
+            <summary>
+            常量定义
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.SigoConst.WebAppName">
+            <summary>
+            WebAppName
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.SigoConst.LogName">
+            <summary>
+            log4net.LogName
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.SigoConst.RepositoryName">
+            <summary>
+            log4net.RepositoryName
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.SigoConst.PolicyName">
+            <summary>
+            跨域策略名称
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.SigoConst.SignalRPolicyName">
+            <summary>
+            SignalR跨域策略名称
+            </summary>
+        </member>
+        <member name="T:Sigo.WebApi.Hubs.ExecOrdersHub">
+            <summary>
+            医嘱执行集线器
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Hubs.ExecOrdersHub._log">
+            <summary>
+            log对象
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Hubs.ExecOrdersHub._webSocketClientService">
+            <summary>
+            WebSocket客户端管理服务
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Hubs.ExecOrdersHub._receiveMsgMethodName">
+            <summary>
+            客户端接收消息的方法名
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Hubs.ExecOrdersHub.#ctor(Microsoft.Extensions.Configuration.IConfiguration,log4net.ILog,Sigo.WebApi.Services.IWebSocketClientService)">
+            <summary>
+            构造<see cref="T:Sigo.WebApi.Hubs.ExecOrdersHub"/>对象
+            </summary>
+            <param name="configuration">配置信息</param>
+            <param name="log">日志对象</param>
+            <param name="webSocketClientService">WebSocket客户端管理服务</param>
+        </member>
+        <member name="M:Sigo.WebApi.Hubs.ExecOrdersHub.OnConnectedAsync">
+            <summary>
+            有新客户端与集线器建立连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sigo.WebApi.Hubs.ExecOrdersHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            客户端与集线器断开连接
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sigo.WebApi.Hubs.ExecOrdersHub.SendMessage(System.String)">
+            <summary>
+            发送消息
+            </summary>
+            <param name="data">消息体</param>
+            <returns></returns>
+        </member>
+        <member name="T:Sigo.WebApi.Middlewares.ExceptionMiddleware">
+            <summary>
+            异常处理中间件
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Middlewares.ExceptionMiddleware._log">
+            <summary>
+            log对象
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Middlewares.ExceptionMiddleware._next">
+            <summary>
+            请求委托
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Middlewares.ExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,log4net.ILog)">
+            <summary>
+            构造<see cref="T:Sigo.WebApi.Middlewares.ExceptionMiddleware"/>对象
+            </summary>
+            <param name="next"><see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/></param>
+            <param name="log">log对象</param>
+        </member>
+        <member name="M:Sigo.WebApi.Middlewares.ExceptionMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            处理Http请求
+            async is important
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:Sigo.WebApi.Middlewares.ExceptionMiddlewareExtensions">
+            <summary>
+            <see cref="T:Sigo.WebApi.Middlewares.ExceptionMiddleware"/>扩展类，用于注册异常中间件
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Middlewares.ExceptionMiddlewareExtensions.UseExceptionMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            注册异常中间件至Http请求管道中
+            </summary>
+            <param name="builder"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:Sigo.WebApi.Middlewares.WebSocketMiddleware">
+            <summary>
+            WebSocket中间件
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Middlewares.WebSocketMiddleware._webSocketClientService">
+            <summary>
+            <see cref="T:Sigo.WebApi.Services.IWebSocketClientService"/>WebSocket服务
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Middlewares.WebSocketMiddleware._hubContext">
+            <summary>
+            HubContext
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Middlewares.WebSocketMiddleware._log">
+            <summary>
+            log对象
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Middlewares.WebSocketMiddleware._next">
+            <summary>
+            请求委托
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Middlewares.WebSocketMiddleware._executeOrdersPipelineName">
+            <summary>
+            医嘱执行WebSocket管道名称
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Middlewares.WebSocketMiddleware._receiveBufferSize">
+            <summary>
+            WebSocket接收消息缓存大小
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Middlewares.WebSocketMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Configuration.IConfiguration,log4net.ILog,Sigo.WebApi.Services.IWebSocketClientService,Microsoft.AspNetCore.SignalR.IHubContext{Sigo.WebApi.Hubs.ExecOrdersHub})">
+            <summary>
+            构造<see cref="T:Sigo.WebApi.Middlewares.WebSocketMiddleware"/>对象
+            </summary>
+            <param name="next"><see cref="T:Microsoft.AspNetCore.Http.RequestDelegate"/></param>
+            <param name="configration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/></param>
+            <param name="log">log对象</param>
+            <param name="webSocketClientService"><see cref="T:Sigo.WebApi.Services.IWebSocketClientService"/></param>
+            <param name="hubContext"><see cref="T:Microsoft.AspNetCore.SignalR.IHubContext`1"/></param>
+        </member>
+        <member name="M:Sigo.WebApi.Middlewares.WebSocketMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            处理Http请求
+            async is important
+            </summary>
+            <param name="httpContext"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sigo.WebApi.Middlewares.WebSocketMiddleware.ListeningAsync(System.String,Microsoft.AspNetCore.Http.HttpContext,System.Net.WebSockets.WebSocket)">
+            <summary>
+            监听WebSocket客户端
+            </summary>
+            <param name="fromClientId">WebSocket客户端ID</param>
+            <param name="context"><see cref="T:Microsoft.AspNetCore.Http.HttpContext"/></param>
+            <param name="webSocket"><see cref="T:System.Net.WebSockets.WebSocket"/>客户端管道</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sigo.WebApi.Middlewares.WebSocketMiddleware.BroadcastToWebSocket(Sigo.WebApi.DataEntities.WebSocketMessageEntity)">
+            <summary>
+            广播消息至WebSocket客户端
+            </summary>
+            <param name="messageEntity">WebSocket消息实体</param>
+        </member>
+        <member name="M:Sigo.WebApi.Middlewares.WebSocketMiddleware.BroadcastToSignalR(Sigo.WebApi.DataEntities.WebSocketMessageEntity)">
+            <summary>
+            广播消息至Signalr客户端
+            </summary>
+            <param name="messageEntity">WebSocket消息实体</param>
+        </member>
+        <member name="T:Sigo.WebApi.Middlewares.WebSocketMiddlewareExtension">
+            <summary>
+            <see cref="T:Sigo.WebApi.Middlewares.WebSocketMiddleware"/>扩展类，用于注册WebSocket中间件
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Middlewares.WebSocketMiddlewareExtension.UseWebSocketMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            将<see cref="T:Sigo.WebApi.Middlewares.WebSocketMiddleware"/>注册至Http请求管道中
+            </summary>
+            <param name="app"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:Sigo.WebApi.Program">
+            <summary>
+            启动文件
+            </summary>
+        </member>
+        <member name="F:Sigo.WebApi.Program._logger">
+            <summary>
+            Log对象
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Program.Main(System.String[])">
+            <summary>
+            程序入口
+            </summary>
+            <param name="args">启动参数</param>
+        </member>
+        <member name="M:Sigo.WebApi.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            构造Web主机
+            </summary>
+            <param name="args">启动参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sigo.WebApi.Program.InitLog4net">
+            <summary>
+            初始化Log4net
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Program.CurrentDomain_UnhandledException(System.Object,System.UnhandledExceptionEventArgs)">
+            <summary>
+            处理未知异常
+            </summary>
+            <param name="sender">事件发生元对象</param>
+            <param name="e">事件参数</param>
+        </member>
+        <member name="M:Sigo.WebApi.Program.CurrentDomain_ProcessExit(System.Object,System.EventArgs)">
+            <summary>
+            进程关闭
+            </summary>
+            <param name="sender">事件发生元对象</param>
+            <param name="e">事件参数</param>
+        </member>
+        <member name="M:Sigo.WebApi.Program.OutputLog(System.String)">
+            <summary>
+            输出错误信息
+            </summary>
+            <param name="errorMsg">错误信息</param>
+        </member>
+        <member name="T:Sigo.WebApi.Startup">
+            <summary>
+            配置服务和应用的请求管道
+            </summary>
+        </member>
+        <member name="P:Sigo.WebApi.Startup.Configuration">
+            <summary>
+            <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>配置文件对象
+            </summary>
+        </member>
+        <member name="M:Sigo.WebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            构造<see cref="T:Sigo.WebApi.Startup"/>对象
+            </summary>
+            <param name="configuration"><see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>配置文件对象</param>
+        </member>
+        <member name="M:Sigo.WebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            配置应用服务
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Sigo.WebApi.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Logging.ILogger{Sigo.WebApi.Startup})">
+            <summary>
+            配置应用的HTTP处理请求管道
+            </summary>
+            <param name="app"><see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder"/></param>
+            <param name="env"><see cref="T:Microsoft.AspNetCore.Hosting.IWebHostEnvironment"/></param>
+        </member>
+        <member name="M:Sigo.WebApi.Startup.BuildWebSocketOptions">
+            <summary>
+            根据配置构建<see cref="T:Microsoft.AspNetCore.Builder.WebSocketOptions"/>对象
+            </summary>
+            <returns><see cref="T:Microsoft.AspNetCore.Builder.WebSocketOptions"/>对象</returns>
+        </member>
+    </members>
+</doc>

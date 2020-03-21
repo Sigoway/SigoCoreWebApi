@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>E:\99.WorkSpace\4.Demo\1.Web\Sigo.WebApi\Sigo.WebApi\Sigo.WebApi.xml</DocumentationFile>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Middlewares\AuthenticationMiddleware.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sigo.WebApi.DataEntities\Sigo.WebApi.DataEntities.csproj" />
+    <ProjectReference Include="..\Sigo.WebApi.DataProvider\Sigo.WebApi.DataProvider.csproj" />
+    <ProjectReference Include="..\Sigo.WebApi.Services.Impl\Sigo.WebApi.Services.Impl.csproj" />
+    <ProjectReference Include="..\Sigo.WebApi.Services\Sigo.WebApi.Services.csproj" />
+    <ProjectReference Include="..\Sigo.WebApi.Utils\Sigo.WebApi.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+
+
+</Project>

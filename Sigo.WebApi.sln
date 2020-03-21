@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigo.WebApi", "Sigo.WebApi\Sigo.WebApi.csproj", "{021F9F80-C9E9-46C6-88B4-67A48FAA9C7E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigo.WebApi.Utils", "Sigo.WebApi.Utils\Sigo.WebApi.Utils.csproj", "{12F77EAD-62E1-4D38-85A5-E6B0631B6572}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigo.WebApi.DataProvider", "Sigo.WebApi.DataProvider\Sigo.WebApi.DataProvider.csproj", "{A9DDF63E-1892-434B-BA75-620A4D3069A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigo.WebApi.Services", "Sigo.WebApi.Services\Sigo.WebApi.Services.csproj", "{6D0633E5-4817-48DB-B379-8A720C891959}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigo.WebApi.Services.Impl", "Sigo.WebApi.Services.Impl\Sigo.WebApi.Services.Impl.csproj", "{920A3F0A-89E7-4A0C-9977-948D9E6AC8E4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sigo.WebApi.DataEntities", "Sigo.WebApi.DataEntities\Sigo.WebApi.DataEntities.csproj", "{26DA91E6-8422-4EA5-A33F-B3B8DD989576}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{021F9F80-C9E9-46C6-88B4-67A48FAA9C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021F9F80-C9E9-46C6-88B4-67A48FAA9C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021F9F80-C9E9-46C6-88B4-67A48FAA9C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021F9F80-C9E9-46C6-88B4-67A48FAA9C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12F77EAD-62E1-4D38-85A5-E6B0631B6572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F77EAD-62E1-4D38-85A5-E6B0631B6572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F77EAD-62E1-4D38-85A5-E6B0631B6572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F77EAD-62E1-4D38-85A5-E6B0631B6572}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9DDF63E-1892-434B-BA75-620A4D3069A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9DDF63E-1892-434B-BA75-620A4D3069A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9DDF63E-1892-434B-BA75-620A4D3069A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9DDF63E-1892-434B-BA75-620A4D3069A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D0633E5-4817-48DB-B379-8A720C891959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D0633E5-4817-48DB-B379-8A720C891959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D0633E5-4817-48DB-B379-8A720C891959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D0633E5-4817-48DB-B379-8A720C891959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{920A3F0A-89E7-4A0C-9977-948D9E6AC8E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{920A3F0A-89E7-4A0C-9977-948D9E6AC8E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{920A3F0A-89E7-4A0C-9977-948D9E6AC8E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{920A3F0A-89E7-4A0C-9977-948D9E6AC8E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26DA91E6-8422-4EA5-A33F-B3B8DD989576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26DA91E6-8422-4EA5-A33F-B3B8DD989576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26DA91E6-8422-4EA5-A33F-B3B8DD989576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26DA91E6-8422-4EA5-A33F-B3B8DD989576}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D4F4ACF-6CD2-4DB8-A10F-CD34A7550C61}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="lib/jquery/jquery.js"></script>
+    <script type="text/javascript">
+        function login() {
+                var userId = $('#userId').val();
+                var pwd = $('#pwd').val();
+                $.ajax({
+                    url: 'http://192.168.0.222:8009/api/Account/login',
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    data: JSON.stringify({
+                        "UserId": userId,
+                        "pwd": pwd
+                    }),
+                    success: function (res) {
+                        if (res.errorMessage) {
+                            alert(res.errorMessage)
+                            $("#msg").text(res.errorMessage);
+                        } else {
+                            var data = JSON.stringify(res.data.userInfo);
+                            alert(data)
+                            $("#msg").text(data);
+                        }
+                    },
+                    error: function (err) {
+                        alert(err.statusText)
+                    }
+                });
+        }
+    </script>
+</head>
+<body>
+        <input id="userId" name="UserId" type="text" />
+        <input id="pwd" name="pwd" type="password" />
+        <button id="login" onclick="login()">提交</button>
+        <label id="msg"></label>
+
+</body>
+</html>

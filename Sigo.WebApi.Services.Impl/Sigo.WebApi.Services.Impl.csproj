@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sigo.WebApi.DataEntities\Sigo.WebApi.DataEntities.csproj" />
+    <ProjectReference Include="..\Sigo.WebApi.DataProvider\Sigo.WebApi.DataProvider.csproj" />
+    <ProjectReference Include="..\Sigo.WebApi.Services\Sigo.WebApi.Services.csproj" />
+  </ItemGroup>
+
+</Project>
