@@ -56,7 +56,7 @@ namespace Sigo.WebApi
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
                 {
-                    Configuration.Bind("JwtSettings", options);
+                    Configuration.Bind("JwtSetting", options);
                     options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
                     {
                         ValidateIssuer = true,
@@ -64,20 +64,20 @@ namespace Sigo.WebApi
                         ValidateLifetime = true,
                         ClockSkew = TimeSpan.FromSeconds(10),
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Configuration.GetValue<string>("JwtSettings:Issuer"),
-                        ValidAudience = Configuration.GetValue<string>("JwtSettings:Audience"),
-                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JwtSettings:SecurityKey")))
+                        ValidIssuer = Configuration.GetValue<string>("JwtSetting:Issuer"),
+                        ValidAudience = Configuration.GetValue<string>("JwtSetting:Audience"),
+                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JwtSetting:SecurityKey")))
                     };
                 });
 
             //注册WebSocket客户端管理服务
             services.AddWebSocketClientManagerServices();
             //注册数据库交互服务
-            services.AddEcisPlatform5DataProvider(Configuration.GetConnectionString("ECIS5"));
+            services.AddSqlServerDataProvider(Configuration.GetConnectionString("Sigo"));
             //注册资源文件相关服务
-            services.AddEcisResourceServices();
-            //注册急诊业务服务
-            services.AddEcisBizServices();
+            services.AddResourceServices();
+            //注册业务服务
+            services.AddBizServices();
 
             services.AddControllers();
 

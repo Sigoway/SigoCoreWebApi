@@ -8,7 +8,7 @@ namespace Sigo.WebApi.DataProvider
     /// <summary>
     /// 提供与SqlServer数据库同步交互的数据驱动类
     /// </summary>
-    public partial class SqlServerDataProvider : BaseDataProvider, IEcisPlatform5DataProvider, IDataProvider
+    public partial class SqlServerDataProvider : BaseDataProvider, ISqlServerDataProvider, IDataProvider
     {
         #region 构造方法
         /// <summary>

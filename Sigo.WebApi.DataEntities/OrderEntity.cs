@@ -1,7 +1,7 @@
 ﻿namespace Sigo.WebApi.DataEntities
 {
     /// <summary>
-    /// 医嘱信息实体类
+    /// 订单信息实体类
     /// </summary>
     public class OrderEntity:BaseEntity
     {

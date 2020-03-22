@@ -9,11 +9,11 @@ namespace Sigo.WebApi.Services
     public static class BizServicesExtensions
     {
         /// <summary>
-        /// 注册急诊业务相关的Service
+        /// 注册业务相关的Service
         /// </summary>
         /// <param name="services"><see cref="IServiceCollection"/></param>
         /// <returns><see cref="IServiceCollection"/></returns>
-        public static IServiceCollection AddEcisBizServices(this IServiceCollection services)
+        public static IServiceCollection AddBizServices(this IServiceCollection services)
         {
             return services
                 .AddScoped<IAccountService, AccountService>()
@@ -26,7 +26,7 @@ namespace Sigo.WebApi.Services
         /// </summary>
         /// <param name="services"><see cref="IServiceCollection"/></param>
         /// <returns><see cref="IServiceCollection"/></returns>
-        public static IServiceCollection AddEcisResourceServices(this IServiceCollection services)
+        public static IServiceCollection AddResourceServices(this IServiceCollection services)
         {
             return services.AddScoped<IResourceService, ResourceService>();
         }

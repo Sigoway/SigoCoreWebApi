@@ -19,7 +19,7 @@ namespace Sigo.WebApi.Services.Impl
         /// 构造<see cref="PatientService"/>对象
         /// </summary>
         /// <param name="dataProvider">数据驱动</param>
-        public PatientService(IEcisPlatform5DataProvider dataProvider)
+        public PatientService(ISqlServerDataProvider dataProvider)
         {
             _dataProvider = dataProvider;
         }

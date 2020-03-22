@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Sigo.WebApi.DataEntities
 {
@@ -12,16 +13,6 @@ namespace Sigo.WebApi.DataEntities
         public string UserId { get; set; }
 
         public string UserName { get; set; }
-
-        public string DisplayName { get; set; }
-
-        public string EmployeeNumber { get; set; }
-
-        public string UserType { get; set; }
-
-        public string DeptCode { get; set; }
-
-        public string DeptName { get; set; }
 
         public IList<string> PermissonList { get; internal set; }
 

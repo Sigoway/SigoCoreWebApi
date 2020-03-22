@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Sigo.WebApi.Controllers
 {
     /// <summary>
-    /// 提供医嘱相关信息的控制器
+    /// 提供订单相关信息的控制器
     /// </summary>
     [Authorize]
     [ApiController]
@@ -27,7 +27,7 @@ namespace Sigo.WebApi.Controllers
         private readonly IConfiguration _configuration;
 
         /// <summary>
-        /// 构造<see cref="PatientController"/>
+        /// 构造<see cref="OrderController"/>
         /// </summary>
         /// <param name="orderService"><see cref="IOrderService"/></param>
         /// <param name="configuration">配置信息</param>
@@ -38,9 +38,8 @@ namespace Sigo.WebApi.Controllers
         }
 
         /// <summary>
-        /// 获取医嘱执行列表
+        /// 获取订单列表
         /// </summary>
-        /// <param name="pvid">就诊唯一标识</param>
         /// <param name="beginTime">开始时间</param>
         /// <param name="endTime">结束时间</param>
         /// <returns>OrderEntity集合</returns>
@@ -50,9 +49,9 @@ namespace Sigo.WebApi.Controllers
         /// </code>
         /// </example>
         [HttpGet("list")]
-        public IList<OrderEntity> GetOrderList(string pvid, DateTime beginTime, DateTime endTime)
+        public IList<OrderEntity> GetOrderList(DateTime beginTime, DateTime endTime)
         {
-            return _orderService.GetOrderList(pvid, beginTime, endTime);
+            return _orderService.GetOrderList(beginTime, endTime);
         }
     }
 }

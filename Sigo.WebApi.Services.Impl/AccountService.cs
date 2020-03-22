@@ -25,7 +25,7 @@ namespace Sigo.WebApi.Services.Impl
         /// 构造<see cref="AccountService"/>对象
         /// </summary>
         /// <param name="dataProvider">数据驱动</param>
-        public AccountService(IEcisPlatform5DataProvider dataProvider)
+        public AccountService(ISqlServerDataProvider dataProvider)
         {
             _dataProvider = dataProvider;
 
@@ -36,22 +36,12 @@ namespace Sigo.WebApi.Services.Impl
                 new UserEntity()
                 {
                     UserId="t001",
-                    UserName = "zhangsan",
-                    DisplayName = "张三",
-                    EmployeeNumber = "T001",
-                    UserType = "医生",
-                    DeptCode = "001",
-                    DeptName = "急诊",
+                    UserName = "张三"
                 },
                 new UserEntity()
                 {
                     UserId="t002",
-                    UserName = "lisi",
-                    DisplayName = "李四",
-                    EmployeeNumber = "T002",
-                    UserType = "护士",
-                    DeptCode = "001",
-                    DeptName = "急诊",
+                    UserName = "李四"
                 }
             };
 #endif

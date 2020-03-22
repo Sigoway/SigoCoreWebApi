@@ -26,20 +26,19 @@ namespace Sigo.WebApi.Utils
                 {
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(ClaimTypes.Name, userEntity.UserId),
-                    new Claim(ClaimTypes.GivenName, userEntity.DisplayName),
-                    new Claim(ClaimTypes.Role, userEntity.UserType),
+                    new Claim(ClaimTypes.GivenName, userEntity.UserName),
                 };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(cnfiguration.GetValue<string>("JwtSettings:SecurityKey")));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(cnfiguration.GetValue<string>("JwtSetting:SecurityKey")));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: cnfiguration.GetValue<string>("JwtSettings:Issuer"),
-                audience: cnfiguration.GetValue<string>("JwtSettings:Audience"),
+                issuer: cnfiguration.GetValue<string>("JwtSetting:Issuer"),
+                audience: cnfiguration.GetValue<string>("JwtSetting:Audience"),
                 signingCredentials: creds,
                 claims: claims,
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddSeconds(cnfiguration.GetValue<int>("JwtSettings:ExpireSeconds")));
+                expires: DateTime.Now.AddSeconds(cnfiguration.GetValue<int>("JwtSetting:ExpireSeconds")));
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
