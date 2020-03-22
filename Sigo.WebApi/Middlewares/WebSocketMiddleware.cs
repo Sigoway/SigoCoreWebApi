@@ -12,6 +12,8 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Sigo.WebApi.Config;
+using Microsoft.Extensions.Options;
 
 namespace Sigo.WebApi.Middlewares
 {
@@ -28,7 +30,7 @@ namespace Sigo.WebApi.Middlewares
         /// <summary>
         /// HubContext
         /// </summary>
-        private readonly IHubContext<ExecOrdersHub> _hubContext;
+        private readonly IHubContext<ChatHub> _hubContext;
 
         /// <summary>
         /// log对象
@@ -41,7 +43,7 @@ namespace Sigo.WebApi.Middlewares
         private readonly RequestDelegate _next;
 
         /// <summary>
-        /// 医嘱执行WebSocket管道名称
+        /// 订单WebSocket管道名称
         /// </summary>
         public readonly string _executeOrdersPipelineName;
 
@@ -54,18 +56,18 @@ namespace Sigo.WebApi.Middlewares
         /// 构造<see cref="WebSocketMiddleware"/>对象
         /// </summary>
         /// <param name="next"><see cref="RequestDelegate"/></param>
-        /// <param name="configration"><see cref="IConfiguration"/></param>
+        /// <param name="appSetting"><see cref="AppSetting"/></param>
         /// <param name="log">log对象</param>
         /// <param name="webSocketClientService"><see cref="IWebSocketClientService"/></param>
         /// <param name="hubContext"><see cref="IHubContext{THub}"/></param>
-        public WebSocketMiddleware(RequestDelegate next, IConfiguration configration, ILog log, IWebSocketClientService webSocketClientService, IHubContext<ExecOrdersHub> hubContext)
+        public WebSocketMiddleware(RequestDelegate next, IOptions<AppSetting> appSetting, ILog log, IWebSocketClientService webSocketClientService, IHubContext<ChatHub> hubContext)
         {
             _next = next;
             _log = log;
             _hubContext = hubContext;
             _webSocketClientService = webSocketClientService;
-            _executeOrdersPipelineName = configration.GetValue<string>("WebSocket:PipelineNames:ExecOrders", "/wsOrder");
-            _receiveBufferSize = configration.GetValue("WebSocket:Options:ReceiveBufferSize", 4) * 1024;
+            _executeOrdersPipelineName = appSetting.Value.WebSocketSetting.ChatPipelineName;
+            _receiveBufferSize = appSetting.Value.WebSocketSetting.ReceiveBufferSize * 1024;
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace Sigo.WebApi.Middlewares
         /// <returns></returns>
         public async Task Invoke(HttpContext httpContext)
         {
-            //医嘱执行WebSocket消息
+            //订单WebSocket消息
             if (httpContext.Request.Path == _executeOrdersPipelineName)
             {
                 if (httpContext.WebSockets.IsWebSocketRequest)

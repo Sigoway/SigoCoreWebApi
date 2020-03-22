@@ -1,8 +1,4 @@
-﻿using Sigo.WebApi.DataProvider;
-using Sigo.WebApi.Hubs;
-using Sigo.WebApi.Middlewares;
-using Sigo.WebApi.Services;
-using log4net;
+﻿using log4net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,11 +6,15 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using Sigo.WebApi.Config;
+using Sigo.WebApi.DataProvider;
+using Sigo.WebApi.Hubs;
+using Sigo.WebApi.Middlewares;
+using Sigo.WebApi.Services;
 using Swashbuckle.AspNetCore.Filters;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -46,6 +46,8 @@ namespace Sigo.WebApi
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AppSetting>(Configuration);
+
             //注册log4net服务
             services.AddSingleton((s) =>
             {
@@ -98,7 +100,7 @@ namespace Sigo.WebApi
                     builder
                     .AllowAnyHeader()
                     .AllowCredentials()
-                    .WithOrigins(Configuration.GetSection("SignalR:Origins").Get<string[]>());
+                    .WithOrigins(Configuration.GetSection("SignalRSetting:Origins").Get<string[]>());
                 });
             });
 
@@ -138,7 +140,9 @@ namespace Sigo.WebApi
         /// </summary>
         /// <param name="app"><see cref="IApplicationBuilder"/></param>
         /// <param name="env"><see cref="IWebHostEnvironment"/></param>
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        /// <param name="logger"><see cref="ILogger"/></param>
+        /// <param name="appSetting"><see cref="AppSetting"/></param>
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger, IOptions<AppSetting> appSetting)
         {
             if (env.IsDevelopment())
             {
@@ -151,7 +155,7 @@ namespace Sigo.WebApi
             }
 
             //启用WebSocket监听
-            var webSocketOptions = BuildWebSocketOptions();
+            var webSocketOptions = BuildWebSocketOptions(appSetting);
             app.UseWebSockets();
             app.UseWebSocketMiddleware();
 
@@ -182,7 +186,7 @@ namespace Sigo.WebApi
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<ExecOrdersHub>(Configuration.GetValue("SignalR:Hubs:ExecOrders:HubName", "/execOrdersHub"));
+                endpoints.MapHub<ChatHub>(appSetting.Value.SignalRSetting.ChatHubName);
                 endpoints.MapControllers();
             });
         }
@@ -191,11 +195,13 @@ namespace Sigo.WebApi
         /// 根据配置构建<see cref="WebSocketOptions"/>对象
         /// </summary>
         /// <returns><see cref="WebSocketOptions"/>对象</returns>
-        private WebSocketOptions BuildWebSocketOptions()
+        private WebSocketOptions BuildWebSocketOptions(IOptions<AppSetting> appSetting)
         {
-            var buffer = Configuration.GetValue("WebSocket:Options:ReceiveBufferSize", 4);
-            var interval = Configuration.GetValue("WebSocket:Options:KeepAliveInterval", 2);
-            return new WebSocketOptions() { ReceiveBufferSize = buffer * 1024, KeepAliveInterval = TimeSpan.FromMinutes(interval) };
+            return new WebSocketOptions()
+            {
+                ReceiveBufferSize = appSetting.Value.WebSocketSetting.ReceiveBufferSize * 1024,
+                KeepAliveInterval = TimeSpan.FromMinutes(appSetting.Value.WebSocketSetting.KeepAliveInterval)
+            };
         }
     }
 }

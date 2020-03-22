@@ -1,17 +1,18 @@
-using Sigo.WebApi.DataEntities;
-using Sigo.WebApi.Services;
 using log4net;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Sigo.WebApi.Config;
+using Sigo.WebApi.DataEntities;
+using Sigo.WebApi.Services;
 using System;
 using System.Threading.Tasks;
 
 namespace Sigo.WebApi.Hubs
 {
     /// <summary>
-    /// 医嘱执行集线器
+    /// 聊天集线器
     /// </summary>
-    public class ExecOrdersHub : Hub
+    public class ChatHub : Hub
     {
         /// <summary>
         /// log对象
@@ -29,16 +30,16 @@ namespace Sigo.WebApi.Hubs
         private readonly string _receiveMsgMethodName;
 
         /// <summary>
-        /// 构造<see cref="ExecOrdersHub"/>对象
+        /// 构造<see cref="ChatHub"/>对象
         /// </summary>
-        /// <param name="configuration">配置信息</param>
+        /// <param name="appSetting">配置信息</param>
         /// <param name="log">日志对象</param>
         /// <param name="webSocketClientService">WebSocket客户端管理服务</param>
-        public ExecOrdersHub(IConfiguration configuration, ILog log, IWebSocketClientService webSocketClientService)
+        public ChatHub(IOptions<AppSetting> appSetting, ILog log, IWebSocketClientService webSocketClientService)
         {
             _log = log;
             _webSocketClientService = webSocketClientService;
-            _receiveMsgMethodName = configuration.GetValue("SignalR:Hubs:ExecOrders:ReceiveMsgMethodName", "ReceiveMessage");
+            _receiveMsgMethodName = appSetting.Value.SignalRSetting.ChatHubReceiveMsgMethodName;
         }
 
         /// <summary>
